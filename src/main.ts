@@ -29,7 +29,6 @@ ThemeServiceInit({
 
 if (environment.production) {
   enableProdMode();
-  s;
 }
 
 platformBrowserDynamic()
