@@ -1,0 +1,6 @@
+<div [ngClass]="{ 'da-logo-shrink': shrink }" class='da-logo' routerLink='/'>
+  <span class='da-logo-devui'>
+    <img alt='DevUI-Logo' src='../../../../../assets/devui-logo.svg' />
+  </span>
+  <span *ngIf='!shrink' class='da-logo-text'>DevUI Admin</span>
+</div>

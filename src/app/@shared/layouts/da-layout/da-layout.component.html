@@ -1,0 +1,54 @@
+<d-layout class='da-layout-wrapper'>
+  <d-aside
+    *ngIf='config?.sidebar?.fixed'
+    [ngStyle]="{
+        display: config.sidebar.hidden ? 'none' : null,
+        width: getSidebarWidth(),
+        flex: '0 0 ' + getSidebarWidth()
+      }"
+    class='da-layout-aside-wrapper'
+  ></d-aside>
+  <d-aside
+    [class.da-layout-aside-fixed]='config?.sidebar?.fixed'
+    [class.da-no-sec-sidebar]='config.sidebar?.secSidebar?.hidden'
+    [class.da-sidebar-top]="config.mode === 'sidebarTop'"
+    [ngStyle]="{
+      display: config.sidebar.hidden ? 'none' : null,
+      zIndex: config.sidebar.zIndex,
+      paddingTop: config.mode === 'headerTop' ? getHeaderHeight() : 0
+    }"
+    class='da-layout-aside-wrapper'
+  >
+    <ng-content select='da-layout-sidebar'></ng-content>
+    <ng-content select='da-layout-sec-sidebar'></ng-content>
+  </d-aside>
+  <d-layout>
+    <d-header
+      *ngIf='config?.header?.fixed'
+      [ngStyle]="{
+        display: config.header?.hidden ? 'none' : null,
+        height: getHeaderHeight()
+      }"
+      class='da-layout-header-wrapper'
+    ></d-header>
+    <d-header
+      [class.da-layout-header-fixed]='config?.header?.fixed'
+      [class.da-no-sec-header]='config.header?.secHeader?.hidden'
+      [ngStyle]="{
+        width: config?.header?.fixed && config.mode === 'sidebarTop' ? 'calc(100% - ' + getSidebarWidth() + ')' : null,
+        display: config.header?.hidden ? 'none' : null,
+        zIndex: config.header?.zIndex
+      }"
+      class='da-layout-header-wrapper'
+    >
+      <ng-content select='da-layout-header'></ng-content>
+      <ng-content select='da-layout-sec-header'></ng-content>
+    </d-header>
+    <d-content class='da-layout-content-wrapper'>
+      <ng-content></ng-content>
+    </d-content>
+    <d-footer class='da-layout-footer-wrapper'>
+      <ng-content select='da-layout-footer'></ng-content>
+    </d-footer>
+  </d-layout>
+</d-layout>

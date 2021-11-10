@@ -1,0 +1,55 @@
+<div class='da-operations'>
+  <d-search
+    (searchFn)='onSearch($event)'
+    [iconPosition]="'left'"
+    [noBorder]='true'
+    class='da-header-search'
+  ></d-search>
+  <a href='https://devui.design/admin-page/docs' target='_blank'>
+    <i class='icon icon-helping'></i>
+  </a>
+  <d-badge [count]='5'>
+    <i class='icon icon-notice'></i>
+  </d-badge>
+  <div [trigger]="'hover'" appendToBody class='da-operations-user' dDropDown dDropDownToggle>
+    <d-avatar
+      [height]='22'
+      [name]='user.userName'
+      [width]='22'
+    ></d-avatar>
+    <span class='da-user-name'>{{ user?.userName }}</span>
+    <ul class='devui-dropdown-menu devui-scrollbar' dDropDownMenu role='menu' style='min-width: 120px'>
+      <ng-container *ngIf='haveLoggedIn; else login'>
+        <li role='menuitem'>
+          <a
+            [routerLink]="['/pages', 'user', 'center']"
+            class='devui-dropdown-item'
+          ><i class='icon icon-mine'></i>个人中心</a
+          >
+        </li>
+        <li role='menuitem'>
+          <a
+            [routerLink]="['/pages', 'user', 'settings']"
+            class='devui-dropdown-item'
+          ><i class='icon icon-setting'></i>个人设置</a
+          >
+        </li>
+        <li (click)="handleUserOps('logout')" role='menuitem'>
+          <a class='devui-dropdown-item logout'
+          ><i class='icon icon-exit'></i>登出</a
+          >
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+
+</div>
+
+<ng-template #login>
+  <li role='menuitem'>
+    <a class='devui-dropdown-item'><i class='icon icon-assign'></i>登录</a>
+  </li>
+  <li role='menuitem'>
+    <a class='devui-dropdown-item'><i class='icon icon-add-member'></i>注册</a>
+  </li>
+</ng-template>
